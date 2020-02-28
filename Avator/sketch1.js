@@ -14,6 +14,7 @@ text("click to randomize", 50, 50);
 function draw(){
   if(animating == true)
   {
+      noStroke();
       fill(random(0, 255), random(0, 255), random(0, 255));
       ellipse(random(width), random(height), random(50, 200));
 

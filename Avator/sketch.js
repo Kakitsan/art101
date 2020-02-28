@@ -1,4 +1,5 @@
 let x1;
+let x2;
 var mic;
 var Repeatdrawing;
 
@@ -14,7 +15,7 @@ function setup() {
 //   Head();
 //   Sun(30,30);
 //   angleMode(DEGREES);
-  
+
 }
   function draw(){
   Repeatdrawing.draw();
@@ -39,10 +40,11 @@ class Repeat{
     // x1 = map(mouseX, 0, width, 0, -2);
     console.log("mic level is: " + mic.getLevel());
     x1 = map(mic.getLevel(), 0, 1, 0, -50);
+    x2 = map(mic.getLevel(), 0, 1, 0, -200);
     background(mouseX,155,mouseY);
     Repeatdrawing.Sun(30,30);
     Repeatdrawing.Scabbard();
-    Repeatdrawing.Sword();
+    Repeatdrawing.Sword(x2);
     Repeatdrawing.Body();
     Repeatdrawing.Head();
     angleMode(DEGREES);
@@ -85,8 +87,8 @@ class Repeat{
     quad(490, 240, 495, 220, 545, 220, 540, 240); //cothes on sword
     fill("white");
     quad(480, 280, 485, 260, 535, 260, 530, 280);
-    stroke('black'); 
-    strokeWeight(10); 
+    stroke('black');
+    strokeWeight(10);
     line(545, 205, mouseX, mouseY);
   }
   Mouth(x1){
@@ -121,17 +123,23 @@ class Repeat{
     fill("orange");
     circle(x, y, mouseX);//Sun
 }
- Sword(){
+ Sword(x2){
    push();
    noStroke();
-   // translate(200,455);
-   rotate(0);
+   translate(375, 500);
+   rotate(x2);
    fill("white");
-   quad(172, 465, 105, 350, 145, 230, 210, 454);//sword
+   quad(-222, -100, -259, -250, -175, -370, -175, -100);//sword
     fill("black");
-   quad(172, 487, 155, 470, 227, 448, 225, 469);
+   quad(-250, -100, -220, -80, -175, -80, -150, -100);
     fill("brown"); //arm
-    quad(210, 500, 190, 480, 445, 400, 445, 480);
+    quad(-200, -80, 0, -80, 0, 0, -175, -40);
+   // fill("white");
+   // quad(172, 465, 105, 350, 145, 230, 210, 454);//sword
+   //  fill("black");
+   // quad(172, 487, 155, 470, 227, 448, 225, 469);
+   //  fill("brown"); //arm
+   //  quad(210, 500, 190, 480, 445, 400, 445, 480);
    pop();
  }
 }
