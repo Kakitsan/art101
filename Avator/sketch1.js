@@ -26,7 +26,7 @@ let button;
 
 function preload() {
   for (let i = 0; i <= 8; i++) {
-    imgloader[i] = loadImage(`assets/img_${i}.JPG`);
+    imgloader[i] = loadImage(`https://raw.githubusercontent.com/Kakitsan/art101/master/Avator/assets/img_${i}.jpg`);
   }
 }
 
