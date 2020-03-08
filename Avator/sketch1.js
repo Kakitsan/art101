@@ -1,27 +1,13 @@
-let dogs = [{
-  name: "kate",
-  color: "white"
-}, {
-  name: "kiki",
-  color: "red"
-}, {
-  name: "geo",
-  color: "black"
-}, {
-  name: "Bobo",
-  color: "yellow"
-}, {
-  name: "Nick",
-  color: "green"
-}, {
-  name: "boss",
-  color: "brown"
-}];
+let dogs = [];
 let randomIndex;
 let animating = false;
 let imgloader = [];
 let imgcounter = 0;
-let button;
+let startRandomizerButton;
+let cnv;
+let nameInputs = [];
+let addMoreButton;
+let firstTime = true;
 // let counter = 0;
 
 function preload() {
@@ -31,7 +17,8 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(600, 600);
+  cnv = createCanvas(600, 600);
+  cnv.parent("#canvasDiv");
   background(200);
   text("click to randomize", 50, 50);
   imageMode(CENTER);
@@ -39,9 +26,17 @@ function setup() {
   console.log(imgloader);
   textStyle(BOLD);
   textAlign(CENTER);
-  button = createButton("Click to randomize");
-  button.mousePressed(buttonPressed);
-  button.class("randomizerButton");
+  // button = createButton("Click to randomize");
+  startRandomizerButton = select("#randButton");
+  startRandomizerButton.mousePressed(buttonPressed);
+  // button.class("randomizerButton");
+  addMoreButton = select("#addMoreButton");
+  addMoreButton.mousePressed(addAnotherInput);
+
+  for(let i = 0; i < 3; i++){
+  nameInputs.push(createInput());
+  nameInputs[nameInputs.length - 1].parent("#inputFields");
+}
 
   // setInterval(changeBackground, 1000);
   // setTimeout(changeBackground, 1000);
@@ -71,12 +66,18 @@ function draw() {
 //
 // }
 // }
+function addAnotherInput(){
+  nameInputs.push(createInput());
+  nameInputs[nameInputs.length - 1].parent("#inputFields");
+
+}
+
 function randomizer() {
   animating = false;
   if (dogs[0]) {
     background(random(200, 255));
     randomIndex = int(random(dogs.length));
-    text(`${dogs[randomIndex].name} 's favorite color is ${dogs[randomIndex].color}`, width / 3, height - 380);
+    text(dogs[randomIndex], width / 3, height - 380);
     image(random(imgloader), width / 2, height / 2);
     // text(dogs[randomIndex].name + "'s favorite color is " + dogs[randomIndex].color, 50, 50);
     dogs.splice(randomIndex, 1);
@@ -88,6 +89,13 @@ function randomizer() {
 }
 
 function buttonPressed() {
+  if(firstTime){
+  for(i = 0; i < nameInputs.length; i++){
+    dogs.push(nameInputs[i].value());
+
+  }
+  firstTime = false;
+}
   animating = true;
   setTimeout(randomizer, 2000);
 
